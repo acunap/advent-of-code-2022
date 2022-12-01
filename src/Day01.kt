@@ -1,17 +1,25 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
+    fun parseElves(input: String) = input.split("\n\n").map { elf ->
+        elf.lines().map { it.toInt() }
     }
 
-    fun part2(input: List<String>): Int {
-        return input.size
+    fun takeTopNElves(elves: List<List<Int>>, n: Int) = elves.map { it.sum() }
+        .sortedDescending()
+        .take(n)
+
+    fun part1(input: String): Int {
+        return takeTopNElves(parseElves(input), 1).sum()
     }
 
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
+    fun part2(input: String): Int {
+        return takeTopNElves(parseElves(input), 3).sum()
+    }
 
-    val input = readInput("Day01")
+    val input = readText("Day01")
     println(part1(input))
     println(part2(input))
+
+    val testInput = readText("Day01_test")
+    check(part1(testInput) == 40)
+    check(part2(testInput) == 85)
 }
