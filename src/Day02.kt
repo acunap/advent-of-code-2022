@@ -1,6 +1,9 @@
 import java.lang.IllegalArgumentException
 import java.util.*
+import kotlin.time.ExperimentalTime
+import kotlin.time.measureTime
 
+@OptIn(ExperimentalTime::class)
 fun main() {
     fun part1(input: List<String>): Int {
         return input
@@ -21,13 +24,21 @@ fun main() {
             }
     }
 
-    val input = readLines("Day02")
-    println(part1(input))
-    println(part2(input))
+    val time = measureTime {
+        val input = readLines("Day02")
+        println(part1(input))
+        println(part2(input))
+    }
 
-    val testInput = readLines("Day02_test")
-    check(part1(testInput) == 15)
-    check(part2(testInput) == 12)
+    println("Real data time $time.")
+
+    val timeTest = measureTime {
+        val testInput = readLines("Day02_test")
+        check(part1(testInput) == 15)
+        check(part2(testInput) == 12)
+    }
+
+    println("Test data time $timeTest.")
 }
 
 interface ShapeStrategy {

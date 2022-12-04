@@ -1,3 +1,7 @@
+import kotlin.time.ExperimentalTime
+import kotlin.time.measureTime
+
+@OptIn(ExperimentalTime::class)
 fun main() {
     fun Char.itemCodeToPoints(): Int = if (isLowerCase()) code - 96 else code - 38
 
@@ -35,11 +39,19 @@ fun main() {
             }.sumOf { it.itemCodeToPoints() }
         }
 
-    val input = readLines("Day03")
-    println(part1(input))
-    println(part2(input))
+    val time = measureTime {
+        val input = readLines("Day03")
+        println(part1(input))
+        println(part2(input))
+    }
 
-    val testInput = readLines("Day03_test")
-    check(part1(testInput) == 157)
-    check(part2(testInput) == 70)
+    println("Real data time $time.")
+
+    val timeTest = measureTime {
+        val testInput = readLines("Day03_test")
+        check(part1(testInput) == 157)
+        check(part2(testInput) == 70)
+    }
+
+    println("Test data time $timeTest.")
 }
