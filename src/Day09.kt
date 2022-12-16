@@ -1,5 +1,4 @@
 import kotlin.math.abs
-import kotlin.math.max
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 
@@ -9,29 +8,7 @@ fun main() {
         var head = Pair(0,0)
         var tail = Pair(0, 0)
 
-        var rows = 1
-        var columns = 1
-
-        var tailHistory = mutableSetOf(tail)
-
-        fun draw() {
-            rows = if (head.first >= rows) head.first + 1 else rows
-            columns = if (head.second >= columns) head.second + 1 else columns
-
-            for (n in 0 until rows) {
-                for (m in 0 until columns) {
-                    when {
-                        n == head.first && m == head.second -> print("H ")
-                        n == tail.first && m == tail.second -> print("T ")
-                        else -> print("- ")
-                    }
-                }
-                println()
-            }
-
-            println()
-            println()
-        }
+        val tailHistory = mutableSetOf(tail)
 
         fun moveTail() {
             if (abs(head.first - tail.first) > 1 || abs(head.second - tail.second) > 1) {
@@ -93,10 +70,7 @@ fun main() {
     fun part2(input: List<String>) : Int {
         var knots = (0..9).map { 0 to 0 }.toMutableList()
 
-        var rows = 1
-        var columns = 1
-
-        var tailHistory = mutableSetOf(knots.last())
+        val tailHistory = mutableSetOf(knots.last())
 
         fun moveTail() {
             for (i in 1 until knots.size) {
